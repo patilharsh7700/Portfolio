@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services - Harsh Patil</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* ====== SERVICES PAGE SPECIFIC STYLES ====== */
+        
+        /* Page Header */
+        .page-header {
+            padding: 160px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 30% 50%, rgba(108, 99, 255, 0.08), transparent 70%);
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(108, 99, 255, 0.03), transparent 60%);
+            animation: rotateGlow 30s linear infinite;
+        }
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .page-header .header-badge {
+            display: inline-block;
+            padding: 6px 24px;
+            background: rgba(108, 99, 255, 0.12);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #6c63ff;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .page-header .header-badge i {
+            margin-right: 8px;
+        }
+        .page-header h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+            line-height: 1.1;
+        }
+        .page-header h1 .highlight {
+            background: linear-gradient(135deg, #6c63ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-header .subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+            margin-top: 10px;
+        }
+
+        /* Services Grid */
+        .services-page {
+            padding: 60px 0 80px;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            padding: 35px 30px 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #6c63ff, #3a7bd5);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(108, 99, 255, 0.2);
+            box-shadow: 0 15px 50px rgba(108, 99, 255, 0.08);
+        }
+        .service-card .service-icon {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(108, 99, 255, 0.08);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #6c63ff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .service-card:hover .service-icon {
+            background: rgba(108, 99, 255, 0.15);
+            transform: scale(1.05) rotate(-5deg);
+        }
+        .service-card .service-icon i {
+            transition: transform 0.4s ease;
+        }
+        .service-card:hover .service-icon i {
+            transform: scale(1.1);
+        }
+        .service-card .service-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 1;
+            pointer-events: none;
+        }
+        .service-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .service-card .service-desc {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .service-features li i {
+            color: #6c63ff;
+            font-size: 0.8rem;
+            width: 20px;
+            flex-shrink: 0;
+        }
+        .service-features li:hover {
+            color: #fff;
+            transform: translateX(3px);
+        }
+
+        /* Service Tags */
+        .service-tag {
+            display: inline-block;
+            padding: 3px 14px;
+            background: rgba(108, 99, 255, 0.08);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            color: #6c63ff;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 10px;
+        }
+        .feature {
+            padding: 30px 25px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+            border-color: rgba(108, 99, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(108, 99, 255, 0.05);
+        }
+        .feature i {
+            font-size: 2.5rem;
+            color: #6c63ff;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .feature h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .feature p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 80px 0;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 10px;
+        }
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+        .process-step .step-number {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(108, 99, 255, 0.08);
+            border: 2px solid rgba(108, 99, 255, 0.15);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6c63ff;
+            transition: all 0.4s ease;
+        }
+        .process-step:hover .step-number {
+            background: rgba(108, 99, 255, 0.15);
+            border-color: rgba(108, 99, 255, 0.3);
+            transform: scale(1.1);
+        }
+        .process-step h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .process-step p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .process-step .step-arrow {
+            display: none;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 10px;
+        }
+        .pricing-card {
+            padding: 35px 30px 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(108, 99, 255, 0.2);
+            box-shadow: 0 15px 50px rgba(108, 99, 255, 0.05);
+        }
+        .pricing-card.popular {
+            border-color: rgba(108, 99, 255, 0.2);
+            background: rgba(108, 99, 255, 0.04);
+        }
+        .pricing-card.popular .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 20px;
+            background: linear-gradient(135deg, #6c63ff, #3a7bd5);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 15px 0 5px;
+        }
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .pricing-card .plan-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .pricing-card .plan-desc {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .pricing-card .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px;
+            text-align: left;
+        }
+        .pricing-card .plan-features li {
+            padding: 8px 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pricing-card .plan-features li i {
+            color: #6c63ff;
+            width: 18px;
+            flex-shrink: 0;
+        }
+        .pricing-card .btn {
+            width: 100%;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0 100px;
+            background: radial-gradient(ellipse at center, rgba(108, 99, 255, 0.05), transparent);
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .cta-section .btn {
+            padding: 16px 40px;
+            font-size: 1.05rem;
+        }
+        .pulse-animation {
+            animation: pulseBtn 2s ease-in-out infinite;
+        }
+        @keyframes pulseBtn {
+            0%, 100% { box-shadow: 0 4px 25px rgba(108, 99, 255, 0.3); }
+            50% { box-shadow: 0 4px 50px rgba(108, 99, 255, 0.5); }
+        }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 130px 0 60px;
+            }
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+            .page-header .subtitle {
+                font-size: 1rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .service-card {
+                padding: 25px 20px;
+            }
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .cta-section h2 {
+                font-size: 2.2rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-card .service-number {
+                font-size: 2.5rem;
+            }
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+            .cta-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== PRELOADER ====== -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-text">Loading...</div>
+        </div>
+    </div>
+
+    <!-- ====== CUSTOM CURSOR ====== -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- ====== NAVBAR ====== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Harsh<span>Patil</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ====== PAGE HEADER ====== -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-badge">
+                <i class="fas fa-cogs"></i> What I Offer
+            </div>
+            <h1>My <span class="highlight">Services</span></h1>
+            <p class="subtitle">Professional solutions tailored to bring your vision to life</p>
+        </div>
+    </section>
+
+    <!-- ====== SERVICES SECTION ====== -->
+    <section class="services-page">
+        <div class="container">
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card glassmorphism">
+                    <span class="service-number">01</span>
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Laravel Web Development</h3>
+                    <p class="service-desc">Custom web applications built with Laravel framework</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Custom Web Applications</li>
+                        <li><i class="fas fa-check-circle"></i> Admin Dashboard Development</li>
+                        <li><i class="fas fa-check-circle"></i> Authentication & Authorization</li>
+                        <li><i class="fas fa-check-circle"></i> Database Design & Optimization</li>
+                    </ul>
+                    <span class="service-tag">Laravel 10+</span>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card glassmorphism">
+                    <span class="service-number">02</span>
+                    <div class="service-icon"><i class="fas fa-users-cog"></i></div>
+                    <h3>CRM Development</h3>
+                    <p class="service-desc">Lead management, contacts, deals, and reporting</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Lead Management System</li>
+                        <li><i class="fas fa-check-circle"></i> Contact Tracking & History</li>
+                        <li><i class="fas fa-check-circle"></i> Deal Pipeline Management</li>
+                        <li><i class="fas fa-check-circle"></i> Custom Reports & Analytics</li>
+                    </ul>
+                    <span class="service-tag">Custom CRM</span>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card glassmorphism">
+                    <span class="service-number">03</span>
+                    <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>E-commerce Development</h3>
+                    <p class="service-desc">Online stores with payment integration</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Shopping Cart System</li>
+                        <li><i class="fas fa-check-circle"></i> Payment Gateway Integration</li>
+                        <li><i class="fas fa-check-circle"></i> Order Management</li>
+                        <li><i class="fas fa-check-circle"></i> Inventory Management</li>
+                    </ul>
+                    <span class="service-tag">Payment Integration</span>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card glassmorphism">
+                    <span class="service-number">04</span>
+                    <div class="service-icon"><i class="fas fa-plug"></i></div>
+                    <h3>REST API Integration</h3>
+                    <p class="service-desc">Third-party API integration and custom APIs</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> RESTful API Development</li>
+                        <li><i class="fas fa-check-circle"></i> Third-party Integrations</li>
+                        <li><i class="fas fa-check-circle"></i> API Documentation</li>
+                        <li><i class="fas fa-check-circle"></i> API Security & Authentication</li>
+                    </ul>
+                    <span class="service-tag">REST API</span>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card glassmorphism">
+                    <span class="service-number">05</span>
+                    <div class="service-icon"><i class="fas fa-bug"></i></div>
+                    <h3>Bug Fixing & Optimization</h3>
+                    <p class="service-desc">Debugging and performance optimization</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Bug Resolution</li>
+                        <li><i class="fas fa-check-circle"></i> Performance Optimization</li>
+                        <li><i class="fas fa-check-circle"></i> Code Refactoring</li>
+                        <li><i class="fas fa-check-circle"></i> Security Audit</li>
+                    </ul>
+                    <span class="service-tag">Debugging</span>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card glassmorphism">
+                    <span class="service-number">06</span>
+                    <div class="service-icon"><i class="fas fa-server"></i></div>
+                    <h3>Website Maintenance</h3>
+                    <p class="service-desc">Ongoing support and updates</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Regular Updates</li>
+                        <li><i class="fas fa-check-circle"></i> Security Patches</li>
+                        <li><i class="fas fa-check-circle"></i> Backup & Recovery</li>
+                        <li><i class="fas fa-check-circle"></i> Performance Monitoring</li>
+                    </ul>
+                    <span class="service-tag">24/7 Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== PROCESS SECTION ====== -->
+    <section class="process-section">
+        <div class="container">
+            <h2 class="section-title">How I <span class="gradient-text">Work</span></h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Discovery</h4>
+                    <p>Understanding your needs and project requirements</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Planning</h4>
+                    <p>Creating a detailed roadmap and architecture</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Development</h4>
+                    <p>Building with clean, maintainable code</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Delivery</h4>
+                    <p>Testing, deployment, and ongoing support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== WHY CHOOSE ME ====== -->
+    <section class="why-choose">
+        <div class="container">
+            <h2 class="section-title">Why Choose <span class="gradient-text">Me</span></h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>Timely delivery without compromising quality</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Code</h3>
+                    <p>Best practices for security and scalability</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Ongoing support after project delivery</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Affordable Pricing</h3>
+                    <p>Quality solutions at competitive rates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== PRICING SECTION ====== -->
+    <!-- <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Pricing <span class="gradient-text">Plans</span></h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Starter</div>
+                    <div class="price">$499 <span>/ project</span></div>
+                    <p class="plan-desc">Perfect for small projects</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Basic Laravel Development</li>
+                        <li><i class="fas fa-check"></i> Responsive Design</li>
+                        <li><i class="fas fa-check"></i> 5 Pages</li>
+                        <li><i class="fas fa-check"></i> Basic SEO Setup</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-secondary btn-small">Get Started</a>
+                </div>
+
+                <div class="pricing-card popular">
+                    <span class="popular-badge">Most Popular</span>
+                    <div class="plan-name">Professional</div>
+                    <div class="price">$999 <span>/ project</span></div>
+                    <p class="plan-desc">Full-featured web applications</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Custom Laravel Application</li>
+                        <li><i class="fas fa-check"></i> Admin Dashboard</li>
+                        <li><i class="fas fa-check"></i> Authentication & Authorization</li>
+                        <li><i class="fas fa-check"></i> Database Design</li>
+                        <li><i class="fas fa-check"></i> API Integration</li>
+                        <li><i class="fas fa-check"></i> 30 Days Support</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-primary btn-small">Get Started</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="price">Custom <span>/ project</span></div>
+                    <p class="plan-desc">Complex, large-scale solutions</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Full Custom Development</li>
+                        <li><i class="fas fa-check"></i> Advanced Features</li>
+                        <li><i class="fas fa-check"></i> Third-party Integrations</li>
+                        <li><i class="fas fa-check"></i> Performance Optimization</li>
+                        <li><i class="fas fa-check"></i> 1 Year Support</li>
+                        <li><i class="fas fa-check"></i> Dedicated Developer</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-secondary btn-small">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- ====== CTA SECTION ====== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-glow"></div>
+            <h2>Ready to Build Your <span class="gradient-text">Project?</span></h2>
+            <p>Let's discuss your requirements and turn your ideas into reality</p>
+            <a href="contact.html" class="btn btn-primary btn-large pulse-animation">
+                <i class="fas fa-paper-plane"></i> Get a Quote
+            </a>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Harsh<span>Patil</span></h3>
+                    <p>Building Secure, Scalable &amp; Modern Web Applications</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Harsh Patil. All Rights Reserved.</p>
+                <div class="footer-heart">
+                    Made with <i class="fas fa-heart"></i> by Harsh
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====== BACK TO TOP ====== -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
